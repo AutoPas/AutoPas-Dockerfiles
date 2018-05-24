@@ -15,3 +15,10 @@ This file is used for code coverage purposes. You can build AutoPas in a code-co
 * ninja
 * lcov + gcov
 * gcovr
+
+### doxygen
+This file is used to build the doxygen documentation. It includes:
+* make
+* cmake
+* doxygen
+* graphviz 
