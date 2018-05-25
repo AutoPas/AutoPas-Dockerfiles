@@ -18,6 +18,12 @@ Archer is installed in /usr and is in the path as clang-archer++ and clang-arche
 
 As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
 
+### clang
+This file is used to build the AutoPas library using clang. It contains:
+* make
+* cmake
+* ninja
+* clang v6.0
 
 ### code-coverage
 This file is used for code coverage purposes. You can build AutoPas in a code-coverage version using the file. It includes:
