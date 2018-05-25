@@ -19,19 +19,19 @@ RUN true \
 # add llvm repo key
 #RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
+ENV CLANGVERSION 4.0
 # install llvm
 RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
-#		clang-5.0 \
-#		lldb-5.0 \
-		clang-4.0 \
-		lldb-4.0 \
+		clang-${CLANGVERSION} \
+		lldb-${CLANGVERSION} \
 	&& rm -rf /var/lib/apt/lists/*
+
 # generate links to clang
-RUN ln -s /usr/bin/clang-4.0 /usr/bin/clang
-RUN ln -s /usr/bin/clang++-4.0 /usr/bin/clang++
-RUN ln -s /usr/bin/llvm-config-4.0 /usr/bin/llvm-config
+RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
+RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
+RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
 
 # build everything in /ArcherBuild
 ENV ARCHER_BUILD /ArcherBuild
@@ -42,8 +42,7 @@ WORKDIR $ARCHER_BUILD
 RUN git config --global http.sslVerify false
 
 #get, build and install openmp runtime
-#RUN git clone https://github.com/llvm-mirror/openmp.git openmp
-RUN git clone -b tr4-stable https://github.com/OpenMPToolsInterface/LLVM-openmp.git openmp
+RUN git clone https://github.com/llvm-mirror/openmp.git openmp
 ENV OPENMP_INSTALL /usr
 WORKDIR openmp
 RUN mkdir build
@@ -51,7 +50,7 @@ WORKDIR build
 RUN cmake -G Ninja \
  -D CMAKE_C_COMPILER=clang \
  -D CMAKE_CXX_COMPILER=clang++ \
- -D CMAKE_BUILD_TYPE=Release \
+ -D CMAKE_BUILD_TYPE=DEBUG \
  -D CMAKE_INSTALL_PREFIX:PATH=$OPENMP_INSTALL \
  -D LIBOMP_OMPT_SUPPORT=on \
  -D LIBOMP_OMPT_BLAME=on \
@@ -65,8 +64,7 @@ WORKDIR $ARCHER_BUILD
 RUN git clone https://github.com/PRUNERS/archer.git archer
 ENV ARCHER_INSTALL /usr
 WORKDIR archer
-RUN git checkout v1.0.0
-RUN cat .travis.yml
+RUN git checkout de89c1e
 RUN mkdir build
 WORKDIR build
 RUN cmake -G Ninja \
