@@ -16,6 +16,9 @@ This file is used to check OpenMP data races. It uses the [archer data race dete
 * archer version 1.0.0 - Stand-alone build with LLVM OpenMP Runtime and ThreadSanitizer OMPT Support
 Archer is installed in /usr and is in the path as clang-archer++ and clang-archer
 
+As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
+
+
 ### code-coverage
 This file is used for code coverage purposes. You can build AutoPas in a code-coverage version using the file. It includes:
 * python
