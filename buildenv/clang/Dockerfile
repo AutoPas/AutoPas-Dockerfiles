@@ -26,6 +26,7 @@ RUN true \
 	&& apt-get -qq install -y --no-install-recommends \
 		clang-${CLANGVERSION} \
 		lldb-${CLANGVERSION} \
+		libomp-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 # generate links to clang
