@@ -27,6 +27,7 @@ RUN true \
 		clang-${CLANGVERSION} \
 		lldb-${CLANGVERSION} \
 		libomp-dev \
+		clang-format-${CLANGVERSION} \
 	&& rm -rf /var/lib/apt/lists/*
 
 # generate links to clang

@@ -25,6 +25,7 @@ This file is used to build the AutoPas library using clang. It contains:
 * ninja
 * clang v6.0
 * libomp
+* clang-format-6.0
 
 ### code-coverage
 This file is used for code coverage purposes. You can build AutoPas in a code-coverage version using the file. It includes:
