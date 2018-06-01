@@ -43,6 +43,13 @@ This file is used to build the doxygen documentation. It includes:
 * doxygen
 * graphviz 
 
+### gcc
+This file is used to build the AutoPas library using gcc. It contains:
+* gcc7
+* make
+* cmake
+* ninja
+* openmpi
 
 ## other uses
 Many of the provided Doxygen images / Doxyfiles can be used to build other things. Feel free to grab them and use them for your own purposes.
