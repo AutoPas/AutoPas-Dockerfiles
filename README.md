@@ -1,6 +1,9 @@
 # AutoPas-Dockerfiles
 This repository provides a variety of Dockerfiles for the [AutoPas](https://github.com/AutoPas/AutoPas) library.
 They are sorted in directories according to the task they are meant to fulfill:
+
+Prebuild docker-images can be found at https://hub.docker.com/r/autopas/
+
 ## buildenv
 Files in the buildenv directory are meant to build AutoPas.
 You can build AutoPas without installing any dependencies simply by using the generated images.
@@ -8,6 +11,17 @@ You can build AutoPas without installing any dependencies simply by using the ge
 The generated images are used by Jenkins to test the AutoPas library.
 
 ### archer
+This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
+* make
+* cmake
+* ninja
+* clang v6.0.0
+* archer version 2.0.0 - Stand-alone build with LLVM OpenMP Runtime and ThreadSanitizer OMPT Support
+Archer is installed in /usr and is in the path as clang-archer++ and clang-archer
+
+As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
+
+### archer-v1.0.0
 This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
 * make
 * cmake
