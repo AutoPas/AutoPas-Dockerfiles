@@ -19,8 +19,8 @@ RUN true \
 # add llvm repo key
 #RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
-ENV CLANGVERSION 4.0
-# install llvm
+ENV CLANGVERSION 6.0
+# install clang and llvm
 RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
@@ -45,7 +45,13 @@ RUN git config --global http.sslVerify false
 RUN git clone https://github.com/llvm-mirror/openmp.git openmp
 ENV OPENMP_INSTALL /usr
 WORKDIR openmp
-RUN git checkout b1a95ef
+
+# openmp master with last working commit
+#RUN git checkout b1a95ef
+
+# openmp release_60
+RUN git checkout d5aa29c
+
 RUN mkdir build
 WORKDIR build
 RUN cmake -G Ninja \
@@ -60,12 +66,12 @@ RUN cmake -G Ninja \
 RUN ninja
 RUN ninja install
 
-# get, build and install archer v1.0.0
+# get, build and install archer v2.0.0
 WORKDIR $ARCHER_BUILD
 RUN git clone https://github.com/PRUNERS/archer.git archer
 ENV ARCHER_INSTALL /usr
 WORKDIR archer
-RUN git checkout de89c1e
+RUN git checkout 2aacc54
 RUN mkdir build
 WORKDIR build
 RUN cmake -G Ninja \
