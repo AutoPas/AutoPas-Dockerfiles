@@ -45,6 +45,7 @@ RUN git config --global http.sslVerify false
 RUN git clone https://github.com/llvm-mirror/openmp.git openmp
 ENV OPENMP_INSTALL /usr
 WORKDIR openmp
+RUN git checkout b1a95ef
 RUN mkdir build
 WORKDIR build
 RUN cmake -G Ninja \
