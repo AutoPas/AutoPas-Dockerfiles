@@ -20,7 +20,7 @@ This file is used to check OpenMP data races. It uses the [archer data race dete
 Archer is installed in /usr and is in the path as clang-archer++ and clang-archer
 
 As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
-Important: `**export TSAN_OPTIONS="ignore_noninstrumented_modules=1"**` might be needed for archer v2.0.0 if you encounter errors in openmp mutexes etc.
+**Important**: `export TSAN_OPTIONS="ignore_noninstrumented_modules=1"` might be needed for archer v2.0.0 if you encounter errors in openmp mutexes etc.
 
 ### archer-v1.0.0
 This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
