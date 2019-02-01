@@ -51,6 +51,13 @@ This file is used for code coverage purposes. You can build AutoPas in a code-co
 * lcov + gcov
 * gcovr
 
+### cuda
+This file is used to build the AutoPas library using cuda. It contains:
+* make
+* cmake
+* ninja
+* cuda v10.0
+
 ### doxygen
 This file is used to build the doxygen documentation. It includes:
 * make
