@@ -5,12 +5,15 @@ RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
 		build-essential \
-		cmake \
+		python-pip \
 		ninja-build \
 		wget \
 		gdb \
 		git \
 	&& rm -rf /var/lib/apt/lists/*
+# install current cmake
+RUN pip install --upgrade pip
+RUN pip install --upgrade cmake
 
 # add llvm repository
 #RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 main\n\
