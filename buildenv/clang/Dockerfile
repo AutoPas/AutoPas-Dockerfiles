@@ -14,6 +14,7 @@ RUN true \
 # install current cmake
 RUN pip install --upgrade pip
 RUN pip install --upgrade cmake
+RUN pip install --upgrade cmake-format
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main\n\
