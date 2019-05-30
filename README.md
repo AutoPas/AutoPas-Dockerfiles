@@ -36,6 +36,7 @@ As Archer already sets -fopenmp OpenMP will always be automatically enabled with
 ### clang
 This file is used to build the AutoPas library using clang. It contains:
 * make
+* ccache
 * cmake
 * ninja
 * clang v6.0
@@ -63,7 +64,7 @@ This file is used to build the doxygen documentation. It includes:
 * make
 * cmake
 * doxygen
-* graphviz 
+* graphviz
 
 ### gcc
 This file is used to build the AutoPas library using gcc. It contains:
@@ -72,6 +73,7 @@ This file is used to build the AutoPas library using gcc. It contains:
 * cmake
 * ninja
 * openmpi
+* ccache
 
 ## other uses
 Many of the provided Doxygen images / Doxyfiles can be used to build other things. Feel free to grab them and use them for your own purposes.
