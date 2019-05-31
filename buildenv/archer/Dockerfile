@@ -10,6 +10,7 @@ RUN true \
 		wget \
 		gdb \
 		git \
+		ccache \
 	&& rm -rf /var/lib/apt/lists/*
 # install current cmake
 RUN pip install --upgrade pip
@@ -85,4 +86,3 @@ RUN cmake -G Ninja \
  ..
 RUN ninja
 RUN ninja install
-

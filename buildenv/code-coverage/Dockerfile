@@ -7,6 +7,7 @@ RUN true \
 		python \
 		lcov \
 		gcovr \
+		ccache \
 	&& rm -rf /var/lib/apt/lists/*
 
 

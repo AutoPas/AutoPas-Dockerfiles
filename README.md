@@ -13,6 +13,7 @@ The generated images are used by Jenkins to test the AutoPas library.
 ### archer
 This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
 * make
+* ccache
 * cmake
 * ninja
 * clang v6.0.0
@@ -51,6 +52,7 @@ This file is used for code coverage purposes. You can build AutoPas in a code-co
 * ninja
 * lcov + gcov
 * gcovr
+* ccache
 
 ### cuda
 This file is used to build the AutoPas library using cuda. It contains:
