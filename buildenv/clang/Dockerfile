@@ -5,6 +5,7 @@ RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
 		build-essential \
+		ccache \
 		python-pip \
 		ninja-build \
 		wget \
@@ -38,4 +39,3 @@ RUN true \
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
 RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
 RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
-

@@ -13,6 +13,7 @@ The generated images are used by Jenkins to test the AutoPas library.
 ### archer
 This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
 * make
+* ccache
 * cmake
 * ninja
 * clang v6.0.0
@@ -36,6 +37,7 @@ As Archer already sets -fopenmp OpenMP will always be automatically enabled with
 ### clang
 This file is used to build the AutoPas library using clang. It contains:
 * make
+* ccache
 * cmake
 * ninja
 * clang v6.0
@@ -50,6 +52,7 @@ This file is used for code coverage purposes. You can build AutoPas in a code-co
 * ninja
 * lcov + gcov
 * gcovr
+* ccache
 
 ### cuda
 This file is used to build the AutoPas library using cuda. It contains:
@@ -63,7 +66,7 @@ This file is used to build the doxygen documentation. It includes:
 * make
 * cmake
 * doxygen
-* graphviz 
+* graphviz
 
 ### gcc
 This file is used to build the AutoPas library using gcc. It contains:
@@ -72,6 +75,7 @@ This file is used to build the AutoPas library using gcc. It contains:
 * cmake
 * ninja
 * openmpi
+* ccache
 
 ## other uses
 Many of the provided Doxygen images / Doxyfiles can be used to build other things. Feel free to grab them and use them for your own purposes.
