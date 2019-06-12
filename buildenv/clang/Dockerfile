@@ -11,6 +11,7 @@ RUN true \
 		wget \
 		gdb \
 		git \
+		python-setuptools \
 	&& rm -rf /var/lib/apt/lists/*
 # install current cmake
 RUN pip install --upgrade pip
