@@ -16,6 +16,7 @@ RUN true \
 		python-setuptools \
 		python \
 		ccache \
+		ssh \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
