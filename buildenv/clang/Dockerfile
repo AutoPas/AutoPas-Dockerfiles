@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # install base requirements
 RUN true \
@@ -12,6 +12,7 @@ RUN true \
 		gdb \
 		git \
 		python-setuptools \
+		gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 # install current cmake
 RUN pip install --upgrade pip
@@ -19,13 +20,13 @@ RUN pip install --upgrade cmake
 RUN pip install --upgrade cmake-format
 
 # add llvm repository
-RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main\n\
-deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main" > /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" > /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
-ENV CLANGVERSION 6.0
+ENV CLANGVERSION 8
 # install llvm
 RUN true \
 	&& apt-get -qq update \
