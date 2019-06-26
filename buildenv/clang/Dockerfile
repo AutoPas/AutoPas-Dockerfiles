@@ -20,8 +20,10 @@ RUN pip install --upgrade cmake
 RUN pip install --upgrade cmake-format
 
 # add llvm repository
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n" > /etc/apt/sources.list.d/llvm.list
 RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" > /etc/apt/sources.list.d/llvm.list
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n" >> /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
@@ -34,6 +36,7 @@ RUN true \
 		clang-${CLANGVERSION} \
 		lldb-${CLANGVERSION} \
 		libomp-dev \
+		clang-format-6.0 \
 		clang-format-${CLANGVERSION} \
 	&& rm -rf /var/lib/apt/lists/*
 
