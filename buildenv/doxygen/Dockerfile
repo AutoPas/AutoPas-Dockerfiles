@@ -1,13 +1,11 @@
-FROM ubuntu:16.04
+FROM autopas/build-base:latest
 
+# install doxygen
 RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		python-pip \
 		doxygen \
 		graphviz \
 	&& rm -rf /var/lib/apt/lists/*
-# install current cmake
-RUN pip install --upgrade pip
-RUN pip install --upgrade cmake
+
+CMD ["sh", "-c", "cmake ../.. >/dev/null && echo \"\ndoxygen warnings:\" && make doc_doxygen > /dev/null"]

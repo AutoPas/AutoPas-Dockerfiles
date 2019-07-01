@@ -1,23 +1,4 @@
-FROM ubuntu:18.04
-
-# install base requirements
-RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		ccache \
-		python-pip \
-		ninja-build \
-		wget \
-		gdb \
-		git \
-		python-setuptools \
-		gnupg \
-	&& rm -rf /var/lib/apt/lists/*
-# install current cmake
-RUN pip install --upgrade pip
-RUN pip install --upgrade cmake
-RUN pip install --upgrade cmake-format
+FROM autopas/build-base
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
@@ -38,9 +19,15 @@ RUN true \
 		libomp-dev \
 		clang-format-6.0 \
 		clang-format-${CLANGVERSION} \
+		python3-pip \
+		python3-setuptools \
 	&& rm -rf /var/lib/apt/lists/*
+RUN pip3 install --upgrade cmake-format
 
 # generate links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
 RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
 RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
+
+
+CMD ["sh", "-c", "echo 'Formatting code...' && cmake -G Ninja -DAUTOPAS_OPENMP=ON ../.. > /dev/null && ninja clangformat > /dev/null && ninja cmakeformat > /dev/null && echo 'done' && ninja && ninja test"]

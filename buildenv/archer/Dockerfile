@@ -1,20 +1,4 @@
-FROM ubuntu:16.04
-
-# install base requirements
-RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		python-pip \
-		ninja-build \
-		wget \
-		gdb \
-		git \
-		ccache \
-	&& rm -rf /var/lib/apt/lists/*
-# install current cmake
-RUN pip install --upgrade pip
-RUN pip install --upgrade cmake
+FROM autopas/build-base
 
 # add llvm repository
 #RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 main\n\
@@ -86,3 +70,6 @@ RUN cmake -G Ninja \
  ..
 RUN ninja
 RUN ninja install
+
+CMD ["sh", "-c", "CXXFLAGS=-Wno-pass-failed CC=clang-archer CXX=clang-archer++ cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DAUTOPAS_USE_VECTORIZATION=OFF ../.. && ninja runTests && export TSAN_OPTIONS='ignore_noninstrumented_modules=1' && ninja test"]
+
