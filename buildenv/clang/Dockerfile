@@ -19,9 +19,15 @@ RUN true \
 		libomp-dev \
 		clang-format-6.0 \
 		clang-format-${CLANGVERSION} \
+		python3-pip \
+		python3-setuptools \
 	&& rm -rf /var/lib/apt/lists/*
+RUN pip3 install --upgrade cmake-format
 
 # generate links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
 RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
 RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
+
+
+CMD ["sh", "-c", "echo 'Formatting code...' && cmake -G Ninja -DAUTOPAS_OPENMP=ON ../.. > /dev/null && ninja clangformat > /dev/null && ninja cmakeformat > /dev/null && git diff --quiet | echo 'done'"]
