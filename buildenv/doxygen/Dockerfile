@@ -7,3 +7,5 @@ RUN true \
 		doxygen \
 		graphviz \
 	&& rm -rf /var/lib/apt/lists/*
+
+CMD ["sh", "-c", "cmake ../.. >/dev/null && echo \"\ndoxygen warnings:\" && make doc_doxygen > /dev/null"]
