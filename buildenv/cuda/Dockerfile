@@ -8,8 +8,9 @@ RUN true \
 		ninja-build \
 		wget \
 		gdb \
-		python-pip \
-		python-setuptools \
 	&& rm -rf /var/lib/apt/lists/*
-RUN pip install --upgrade pip
-RUN pip install --upgrade cmake
+
+RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh --no-check-certificate \
+    && chmod +x cmakeInstallScript.sh \
+    && ./cmakeInstallScript.sh --skip-license \
+    && rm cmakeInstallScript.sh
