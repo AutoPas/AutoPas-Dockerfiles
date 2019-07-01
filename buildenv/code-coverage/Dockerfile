@@ -9,3 +9,5 @@ RUN true \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT []
+
+CMD ["sh", "-c", "cmake -GNinja -DAUTOPAS_CODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../.. && ninja AutoPas_cobertura"]

@@ -14,3 +14,5 @@ RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/down
     && chmod +x cmakeInstallScript.sh \
     && ./cmakeInstallScript.sh --skip-license \
     && rm cmakeInstallScript.sh
+
+CMD ["sh", "-c", "cmake -DAUTOPAS_ENABLE_CUDA=ON -GNinja ../.. && ninja && ninja test"]

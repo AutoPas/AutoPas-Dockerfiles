@@ -70,3 +70,6 @@ RUN cmake -G Ninja \
  ..
 RUN ninja
 RUN ninja install
+
+CMD ["sh", "-c", "CXXFLAGS=-Wno-pass-failed CC=clang-archer CXX=clang-archer++ cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DAUTOPAS_USE_VECTORIZATION=OFF ../.. && ninja runTests && export TSAN_OPTIONS='ignore_noninstrumented_modules=1' && ninja test"]
+
