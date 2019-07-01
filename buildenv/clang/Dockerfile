@@ -30,4 +30,4 @@ RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
 RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
 
 
-CMD ["sh", "-c", "echo 'Formatting code...' && cmake -G Ninja -DAUTOPAS_OPENMP=ON ../.. > /dev/null && ninja clangformat > /dev/null && ninja cmakeformat > /dev/null && echo 'done' && ninja && ctest"]
+CMD ["sh", "-c", "echo 'Formatting code...' && cmake -G Ninja -DAUTOPAS_OPENMP=ON ../.. > /dev/null && ninja clangformat > /dev/null && ninja cmakeformat > /dev/null && echo 'done' && ninja && ninja test"]
