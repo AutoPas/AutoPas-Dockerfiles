@@ -49,8 +49,8 @@ RUN cmake -G Ninja \
  ..
 RUN ninja
 RUN ninja install
-
-ENV TSAN_OPTIONS 'ignore_noninstrumented_modules=1'
+ENV OMP_TOOL_LIBRARIES libarcher.so
+ENV TSAN_OPTIONS ignore_noninstrumented_modules=1
 
 CMD ["sh", "-c", "CXXFLAGS=-Wno-pass-failed CC=clang CXX=clang++ cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DAUTOPAS_USE_VECTORIZATION=OFF -DAUTOPAS_OPENMP=ON -DAUTOPAS_ENABLE_THREAD_SANITIZER=ON ../.. && ninja runTests && ctest -R 'Archer.*' --verbose"]
 
