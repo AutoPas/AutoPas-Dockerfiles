@@ -1,5 +1,16 @@
 FROM nvidia/cuda:10.0-devel-ubuntu18.04
 
+
+# add llvm repository
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n" > /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n" >> /etc/apt/sources.list.d/llvm.list
+
+# add llvm repo key
+RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
+ENV CLANGVERSION 8
+
 # install base requirements
 RUN true \
 	&& apt-get -qq update \
@@ -8,7 +19,16 @@ RUN true \
 		ninja-build \
 		wget \
 		gdb \
+		clang-${CLANGVERSION} \
+		lldb-${CLANGVERSION} \
+		libomp-dev \
 	&& rm -rf /var/lib/apt/lists/*
+
+# generate links to clang
+RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
+RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
+RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
+
 
 RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh --no-check-certificate \
     && chmod +x cmakeInstallScript.sh \
