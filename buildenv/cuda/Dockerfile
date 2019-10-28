@@ -1,6 +1,12 @@
 FROM nvidia/cuda:10.0-devel-ubuntu18.04
 
 
+RUN true \
+	&& apt-get -qq update \
+	&& apt-get -qq install -y --no-install-recommends \
+		wget \
+	&& rm -rf /var/lib/apt/lists/*
+
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
 deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n" > /etc/apt/sources.list.d/llvm.list
