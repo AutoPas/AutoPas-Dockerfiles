@@ -9,7 +9,7 @@ deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n" >> /etc/apt/
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
-ENV CLANGVERSION 8
+ENV CLANGVERSION 9
 # install llvm
 RUN true \
 	&& apt-get -qq update \
