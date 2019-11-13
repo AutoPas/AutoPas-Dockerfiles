@@ -1,15 +1,16 @@
 FROM autopas/build-base
 
+ENV CLANGVERSION 9
+
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
 deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n" > /etc/apt/sources.list.d/llvm.list
-RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n" >> /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-${CLANGVERSION} main\n\
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
-ENV CLANGVERSION 9
 # install llvm
 RUN true \
 	&& apt-get -qq update \
