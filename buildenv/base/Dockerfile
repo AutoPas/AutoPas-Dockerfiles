@@ -11,7 +11,12 @@ RUN true \
 		git \
 		ccache \
 		ssh \
-		gnupg
+		gnupg \
+# install AutoPas dependencies so we don't rely on bundled versions
+        libeigen3-dev \
+        libyaml-cpp-dev \
+        # libspdlog-dev \ <- version too old. Needs at least 1.3.1
+    && rm -rf /var/lib/apt/lists/*
 
 # we might want to fix the certificate stuff
 RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh --no-check-certificate \
@@ -30,12 +35,6 @@ RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/down
     # && make -j4 \
     # && make install
 
-# install AutoPas dependencies so we don't rely on bundled versions
-RUN apt-get -qq install -y --no-install-recommends \
-        libeigen3-dev \
-        libyaml-cpp-dev \
-        # libspdlog-dev \ <- version too old. Needs at least 1.3.1
-    && rm -rf /var/lib/apt/lists/*
 # install spdlog from source bc repo version is too old
 RUN wget -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --no-check-certificate \
     && tar -xzf spdlog.tgz \
