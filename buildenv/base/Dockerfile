@@ -47,4 +47,7 @@ RUN wget -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --
         -DSPDLOG_BUILD_TESTS=OFF \
     && make install -j4
 
-ENTRYPOINT []
+COPY bin/entrypoint.sh /usr/local/bin
+RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
+
+ENTRYPOINT ["entrypoint.sh"]

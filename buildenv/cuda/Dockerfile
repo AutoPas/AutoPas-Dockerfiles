@@ -43,3 +43,8 @@ RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/down
     && rm cmakeInstallScript.sh
 
 CMD ["sh", "-c", "cmake -DAUTOPAS_ENABLE_CUDA=ON -GNinja ../.. && ninja && ninja test"]
+
+COPY bin/entrypoint.sh /usr/local/bin
+RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
+
+ENTRYPOINT ["entrypoint.sh"]
