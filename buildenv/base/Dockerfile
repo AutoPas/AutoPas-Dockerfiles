@@ -49,5 +49,7 @@ RUN wget -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --
 
 COPY bin/entrypoint.sh /usr/local/bin
 RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
+RUN mkdir -p /ccache_default_dir
+RUN chmod 777 /ccache_default_dir
 
 ENTRYPOINT ["entrypoint.sh"]
