@@ -11,28 +11,15 @@ You can build AutoPas without installing any dependencies simply by using the ge
 The generated images are used by Jenkins to test the AutoPas library.
 
 ### archer
-This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
+This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/llvm/llvm-project/tree/master/openmp/tools/archer/). The file includes:
 * make
 * ccache
 * cmake
 * ninja
-* clang v6.0.0
-* archer version 2.0.0 - Stand-alone build with LLVM OpenMP Runtime and ThreadSanitizer OMPT Support
-Archer is installed in /usr and is in the path as clang-archer++ and clang-archer
+* clang v10
+* llvm openmp library (v10) with bundled archer - it is automatically loaded when clang is used as compiler.
 
-As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
-**Important**: `export TSAN_OPTIONS="ignore_noninstrumented_modules=1"` might be needed for archer v2.0.0 if you encounter errors in openmp mutexes etc.
-
-### archer-v1.0.0
-This file is used to check OpenMP data races. It uses the [archer data race detection tool](https://github.com/PRUNERS/archer). The file includes:
-* make
-* cmake
-* ninja
-* clang v4.0
-* archer version 1.0.0 - Stand-alone build with LLVM OpenMP Runtime and ThreadSanitizer OMPT Support
-Archer is installed in /usr and is in the path as clang-archer++ and clang-archer
-
-As Archer already sets -fopenmp OpenMP will always be automatically enabled within AutoPas.
+**Important**: `export TSAN_OPTIONS="ignore_noninstrumented_modules=1"` is recommended for archer.
 
 ### clang
 This file is used to build the AutoPas library using clang. It contains:
