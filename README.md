@@ -61,7 +61,7 @@ This file is used to build the AutoPas library using gcc. It contains:
 * make
 * cmake
 * ninja
-* openmpi
+* mpich
 * ccache
 
 ## other uses
