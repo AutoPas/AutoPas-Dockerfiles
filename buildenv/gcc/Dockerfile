@@ -4,8 +4,7 @@ FROM autopas/build-base:latest
 RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
-		libopenmpi-dev \
-		openmpi-bin \
+		mpich \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/mpirun
