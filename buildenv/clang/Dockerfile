@@ -18,10 +18,10 @@ RUN true \
 		clang-${CLANGVERSION} \
 		lldb-${CLANGVERSION} \
 		libomp-dev \
-		clang-format-6.0 \
 		clang-format-${CLANGVERSION} \
 		python3-pip \
 		python3-setuptools \
+		mpich \
 	&& rm -rf /var/lib/apt/lists/*
 RUN pip3 install --upgrade cmake-format
 
