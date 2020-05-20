@@ -12,6 +12,7 @@ RUN true \
 		ccache \
 		ssh \
 		gnupg \
+		ca-certificates \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \
