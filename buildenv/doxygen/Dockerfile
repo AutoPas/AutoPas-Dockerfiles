@@ -21,4 +21,7 @@ RUN mkdir doxygen/myBuild \
     && ninja \
     && ninja install
 
-CMD ["sh", "-c", "cmake ../.. >/dev/null && echo \"\ndoxygen warnings:\" && make doc_doxygen > /dev/null"]
+COPY bin/buildDocumentation.sh /usr/local/bin
+
+# by default build the documentation.
+ENTRYPOINT ["buildDocumentation.sh"]
