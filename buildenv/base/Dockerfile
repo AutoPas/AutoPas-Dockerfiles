@@ -39,6 +39,7 @@ RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/down
 # install spdlog from source bc repo version is too old
 RUN wget -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --no-check-certificate \
     && tar -xzf spdlog.tgz \
+    && rm spdlog.tgz \
     && cd spdlog-* \
     && mkdir build \
     && cd build \
