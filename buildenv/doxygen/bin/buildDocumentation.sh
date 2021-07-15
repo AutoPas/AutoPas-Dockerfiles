@@ -9,7 +9,7 @@ buildDir="docker-build-doxygen"
 
 cd "${repoPath}"
 rm -rf "${buildDir}"
-mkdir "${buildDir}" && cd $_
+mkdir "${buildDir}" && cd "${buildDir}"
 
 # create doxygen target
 cmake -DAUTOPAS_BUILD_TARGET_DOC=ON -DAUTOPAS_BUILD_EXAMPLES=ON ..

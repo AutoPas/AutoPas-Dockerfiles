@@ -1,5 +1,6 @@
 FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
+ENV CLANGVERSION 8
 
 RUN true \
 	&& apt-get -qq update \
@@ -8,14 +9,11 @@ RUN true \
 	&& rm -rf /var/lib/apt/lists/*
 
 # add llvm repository
-RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main\n" > /etc/apt/sources.list.d/llvm.list
-RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main\n" >> /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
+deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
-ENV CLANGVERSION 8
 
 # install base requirements
 RUN true \

@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+
+ENV UBUNTUVERSION focal
 
 # install base requirements
 RUN true \
@@ -20,14 +22,19 @@ RUN true \
     && rm -rf /var/lib/apt/lists/*
 
 # we might want to fix the certificate stuff
-RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-linux-x86_64.sh --no-check-certificate \
-    && chmod +x cmakeInstallScript.sh \
-    && ./cmakeInstallScript.sh --skip-license \
+RUN wget \
+        --no-verbose \
+        -O cmakeInstallScript.sh \
+        https://github.com/Kitware/CMake/releases/download/v3.21.0-rc3/cmake-3.21.0-rc3-linux-x86_64.sh \
+            --no-check-certificate \
+    && bash cmakeInstallScript.sh \
+            --skip-license \
+            --prefix=/usr \
     && rm cmakeInstallScript.sh
 
 # if we ever need to switch to manual install
 # RUN apt-get -qq install -y cmake \
-    # && wget https://github.com/Kitware/CMake/releases/download/v3.15.0-rc3/cmake-3.15.0-rc3.tar.gz \
+    # && wget --no-verbose https://github.com/Kitware/CMake/releases/download/v3.15.0-rc3/cmake-3.15.0-rc3.tar.gz \
     # && tar -xzf cmake-3.15.0-rc3.tar.gz \
     # && cd $_ \
     # && mkdir build \
@@ -37,7 +44,7 @@ RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/down
     # && make install
 
 # install spdlog from source bc repo version is too old
-RUN wget -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --no-check-certificate \
+RUN wget --no-verbose -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.4.2.tar.gz --no-check-certificate \
     && tar -xzf spdlog.tgz \
     && rm spdlog.tgz \
     && cd spdlog-* \

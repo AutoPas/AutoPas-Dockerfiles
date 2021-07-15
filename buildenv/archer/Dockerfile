@@ -7,8 +7,8 @@ RUN true \
 	&& rm -rf /var/lib/apt/lists/*
 
 # add llvm repository
-RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main\n\
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main" > /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-10 main\n\
+deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-10 main" > /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
