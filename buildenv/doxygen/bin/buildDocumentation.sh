@@ -22,4 +22,6 @@ numWarnings=$(wc -l warnings.out | cut -d' ' -f1)
 if [[ "$numWarnings" -gt 0 ]]; then
     echo "------------- WARNINGS -------------"
     cat warnings.out && exit ${numWarnings}
+else
+    echo "----------- NO WARNINGS ------------"
 fi
