@@ -7,14 +7,14 @@ RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
 		build-essential \
-		ninja-build \
-		wget \
+		ca-certificates \
+		ccache \
 		gdb \
 		git \
-		ccache \
-		ssh \
 		gnupg \
-		ca-certificates \
+		ninja-build \
+		ssh \
+		wget \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \

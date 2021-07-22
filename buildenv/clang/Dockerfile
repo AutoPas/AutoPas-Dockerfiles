@@ -15,7 +15,8 @@ RUN true \
 	&& apt-get -qq install -y --no-install-recommends \
 		clang-${CLANGVERSION} \
 		lldb-${CLANGVERSION} \
-		libomp-dev \
+        libmpich-dev \
+        libomp-dev \
 		clang-format-${CLANGVERSION} \
 		python3-pip \
 		python3-setuptools \

@@ -4,7 +4,8 @@ FROM autopas/build-base:latest
 RUN true \
 	&& apt-get -qq update \
 	&& apt-get -qq install -y --no-install-recommends \
-		mpich \
+        libmpich-dev \
+        mpich \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/mpirun
