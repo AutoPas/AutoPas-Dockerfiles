@@ -1,10 +1,10 @@
 FROM autopas/build-base
 
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		ca-certificates \
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-10 main\n\
@@ -16,12 +16,12 @@ RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|
 ENV CLANGVERSION 10
 # install clang and llvm
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		clang-${CLANGVERSION} \
-		lldb-${CLANGVERSION} \
-		unzip \
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        clang-${CLANGVERSION} \
+        lldb-${CLANGVERSION} \
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
 
 # generate links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang

@@ -2,17 +2,17 @@ FROM intel/oneapi-hpckit
 
 # install base requirements
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		ninja-build \
-		wget \
-		gdb \
-		git \
-		ccache \
-		ssh \
-		gnupg \
-		ca-certificates \
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        build-essential \
+        ninja-build \
+        wget \
+        gdb \
+        git \
+        ccache \
+        ssh \
+        gnupg \
+        ca-certificates \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \

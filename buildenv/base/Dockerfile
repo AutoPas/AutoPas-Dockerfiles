@@ -5,17 +5,17 @@ ENV UBUNTUVERSION focal \
 
 # install base requirements
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		ca-certificates \
-		ccache \
-		gdb \
-		git \
-		gnupg \
-		ninja-build \
-		ssh \
-		wget \
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        build-essential \
+        ca-certificates \
+        ccache \
+        gdb \
+        git \
+        gnupg \
+        ninja-build \
+        ssh \
+        wget \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \

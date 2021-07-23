@@ -2,14 +2,14 @@ FROM autopas/build-base:latest
 
 # install graphviz
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
         ca-certificates \
-		graphviz \
+        graphviz \
         python3 \
         flex \
         bison \
-	&& rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN update-ca-certificates
 

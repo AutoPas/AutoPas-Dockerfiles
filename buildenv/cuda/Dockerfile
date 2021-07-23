@@ -3,10 +3,10 @@ FROM nvidia/cuda:10.1-devel-ubuntu18.04
 ENV CLANGVERSION 8
 
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		wget \
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
@@ -17,17 +17,17 @@ RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|
 
 # install base requirements
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		build-essential \
-		ninja-build \
-		wget \
-		gdb \
-		clang-${CLANGVERSION} \
-		lldb-${CLANGVERSION} \
-		libomp-dev \
-		ccache \
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        build-essential \
+        ninja-build \
+        wget \
+        gdb \
+        clang-${CLANGVERSION} \
+        lldb-${CLANGVERSION} \
+        libomp-dev \
+        ccache \
+    && rm -rf /var/lib/apt/lists/*
 
 # generate links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
