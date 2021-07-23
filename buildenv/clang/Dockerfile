@@ -11,17 +11,16 @@ RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|
 
 # install llvm
 RUN true \
-	&& apt-get -qq update \
-	&& apt-get -qq install -y --no-install-recommends \
-		clang-${CLANGVERSION} \
-		lldb-${CLANGVERSION} \
-        libmpich-dev \
+    && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends \
+        clang-${CLANGVERSION} \
+        lldb-${CLANGVERSION} \
+        libopenmpi-dev \
         libomp-dev \
-		clang-format-${CLANGVERSION} \
-		python3-pip \
-		python3-setuptools \
-		mpich \
-	&& rm -rf /var/lib/apt/lists/*
+        clang-format-${CLANGVERSION} \
+        python3-pip \
+        python3-setuptools \
+    && rm -rf /var/lib/apt/lists/*
 RUN pip3 install --upgrade cmake-format
 
 # generate links to clang
