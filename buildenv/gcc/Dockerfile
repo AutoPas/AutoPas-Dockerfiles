@@ -7,9 +7,11 @@ RUN true \
         libopenmpi-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN rm /usr/bin/mpirun
-RUN echo '/etc/alternatives/mpirun --oversubscribe --allow-run-as-root $@' > /usr/bin/mpirun
-RUN chmod +x /usr/bin/mpirun
+# wrap mpirun with a script that adds some flags
+RUN mkdir /mpi_bkp \
+    && mv /usr/bin/mpirun /mpi_bkp \
+    && echo '/mpi_bkp/mpirun --oversubscribe --allow-run-as-root $@' > /usr/bin/mpirun \
+    && chmod +x /usr/bin/mpirun
 ENTRYPOINT []
 
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]
