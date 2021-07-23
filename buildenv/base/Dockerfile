@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
-ENV UBUNTUVERSION focal
+ENV UBUNTUVERSION focal \
+    DEBIAN_FRONTEND="noninteractive"
 
 # install base requirements
 RUN true \
