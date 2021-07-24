@@ -12,6 +12,7 @@ RUN mkdir /mpi_bkp \
     && mv /usr/bin/mpirun /mpi_bkp \
     && echo '/mpi_bkp/mpirun --oversubscribe --allow-run-as-root $@' > /usr/bin/mpirun \
     && chmod +x /usr/bin/mpirun
+
 ENTRYPOINT []
 
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]
