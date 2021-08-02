@@ -1,4 +1,4 @@
-FROM autopas/build-base:latest
+FROM autopas/build-base
 
 # install stuff
 # openmpi 4.0.3 still has a memory leak, hence install mpich

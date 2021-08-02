@@ -1,4 +1,4 @@
-FROM autopas/build-base:latest
+FROM autopas/build-base
 
 # install graphviz
 RUN true \
