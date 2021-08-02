@@ -9,13 +9,14 @@ deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
-# install llvm
+# install stuff
+# openmpi 4.0.3 still has a memory leak, hence install mpich
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
-        libopenmpi-dev \
+        libmpich-dev \
         libomp-dev \
         clang-format-${CLANGVERSION} \
         python3-pip \
@@ -23,7 +24,7 @@ RUN true \
     && rm -rf /var/lib/apt/lists/*
 RUN pip3 install --upgrade cmake-format
 
-# generate links to clang
+# generate version agnostic links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
 RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
 RUN ln -s /usr/bin/llvm-config-${CLANGVERSION} /usr/bin/llvm-config
