@@ -20,6 +20,8 @@ RUN true \
         libeigen3-dev \
         libyaml-cpp-dev \
         # libspdlog-dev \ <- version too old. Needs at least 1.3.1
+        # needed for bundled antlr4 (rule based tuning parser engine)
+        uuid-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # we might want to fix the certificate stuff
