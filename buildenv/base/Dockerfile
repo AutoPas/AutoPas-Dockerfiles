@@ -14,6 +14,7 @@ RUN true \
         git \
         gnupg \
         ninja-build \
+        libsqlite3-dev \
         ssh \
         wget \
 # install AutoPas dependencies so we don't rely on bundled versions
