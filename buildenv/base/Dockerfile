@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 ENV UBUNTUVERSION="focal" \
     DEBIAN_FRONTEND="noninteractive"
 
-# install base requirements
+# install base requirements + stuff that makes debugging easier
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
@@ -16,6 +16,7 @@ RUN true \
         ninja-build \
         libsqlite3-dev \
         ssh \
+        vim \
         wget \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
