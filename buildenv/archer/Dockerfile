@@ -6,14 +6,15 @@ RUN true \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+ENV CLANGVERSION 10
+
 # add llvm repository
-RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-10 main\n\
-deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-10 main" > /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
+deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main" > /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
-RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
+RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 
-ENV CLANGVERSION 10
 # install clang and llvm
 RUN true \
     && apt-get -qq update \
@@ -45,14 +46,13 @@ ENV OPENMP_INSTALL /usr
 RUN mkdir build
 WORKDIR build
 RUN cmake -G Ninja \
- -D CMAKE_C_COMPILER=clang \
- -D CMAKE_CXX_COMPILER=clang++ \
- -D CMAKE_BUILD_TYPE=RELEASE \
- -D CMAKE_INSTALL_PREFIX:PATH=$OPENMP_INSTALL \
- -D LIBOMP_OMPT_SUPPORT=on \
- ..
+    -D CMAKE_C_COMPILER=clang \
+    -D CMAKE_CXX_COMPILER=clang++ \
+    -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX:PATH=${OPENMP_INSTALL} \
+    -D LIBOMP_OMPT_SUPPORT=ON \
+    ..
 RUN ninja
 RUN ninja install
-#RUN rm -rf /ArcherBuild
-#WORKDIR /
+WORKDIR /
 
