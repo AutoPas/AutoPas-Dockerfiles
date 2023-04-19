@@ -14,7 +14,7 @@ RUN true \
 RUN update-ca-certificates
 
 # install doxygen from git for most recent version
-RUN git clone https://github.com/doxygen/doxygen.git
+RUN git clone --depth 1 --branch master https://github.com/doxygen/doxygen.git
 RUN mkdir doxygen/myBuild \
     && cd doxygen/myBuild \
     && cmake -G Ninja -DCMAKE_BUILD_TYPE=Release .. \
