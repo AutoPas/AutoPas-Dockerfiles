@@ -17,7 +17,7 @@ RUN true \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
         libmpich-dev \
-        libomp-dev \
+        libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
         python3-pip \
         python3-setuptools \
