@@ -1,6 +1,6 @@
 FROM autopas/build-base
 
-ENV CLANGVERSION 9
+ENV CLANGVERSION 13
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
