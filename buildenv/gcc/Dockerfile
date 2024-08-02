@@ -18,4 +18,13 @@ RUN true \
     && ln -s -f /usr/bin/gcc-${GCCVERSION} /usr/bin/gcc \
     && ln -s -f /usr/bin/g++-${GCCVERSION} /usr/bin/g++
 
+# install lcov and set gcov-11
+RUN cd \
+    && perl -MCPAN -e 'install(Capture::Tiny, DateTime, Date::Parse, Cpanel::JSON::XS)' \
+    && git clone https://github.com/linux-test-project/lcov.git \
+    && cd lcov \
+    && make install \
+    && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-11 60 \
+    && cd
+
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]

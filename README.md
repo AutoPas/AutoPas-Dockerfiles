@@ -16,7 +16,7 @@ This file is used to check OpenMP data races. It uses the [archer data race dete
 * ccache
 * cmake
 * ninja
-* clang v10
+* clang
 * llvm openmp library (v10) with bundled archer - it is automatically loaded when clang is used as compiler.
 
 **Important**: `export TSAN_OPTIONS="ignore_noninstrumented_modules=1"` is recommended for archer.
@@ -27,19 +27,13 @@ This file is used to build the AutoPas library using clang. It contains:
 * ccache
 * cmake
 * ninja
-* clang v6.0
+* clang
 * libomp
-* clang-format-6.0
+* clang-format
 
 ### code-coverage
-This file is used for code coverage purposes. You can build AutoPas in a code-coverage version using the file. It includes:
-* python
-* gcc
-* cmake
-* ninja
-* lcov + gcov
-* gcovr
-* ccache
+
+This used to be a container for the coverage target but is not used anymore. The coverage target can now be built with the GCC container.
 
 ### cuda
 This file is used to build the AutoPas library using cuda. It contains:
@@ -57,12 +51,13 @@ This file is used to build the doxygen documentation. It includes:
 
 ### gcc
 This file is used to build the AutoPas library using gcc. It contains:
-* gcc7
+* gcc
 * make
 * cmake
 * ninja
 * mpich
 * ccache
+* lcov
 
 ## other uses
 Many of the provided Doxygen images / Doxyfiles can be used to build other things. Feel free to grab them and use them for your own purposes.
