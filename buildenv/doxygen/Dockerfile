@@ -9,6 +9,7 @@ RUN true \
         python3 \
         flex \
         bison \
+        python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN update-ca-certificates
