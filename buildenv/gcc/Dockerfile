@@ -10,6 +10,7 @@ RUN true \
     && apt-get -qq install -y --no-install-recommends \
         libmpich-dev \
         software-properties-common \
+        python3-dev \
     && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \

@@ -18,6 +18,7 @@ RUN true \
         ssh \
         vim \
         wget \
+        python3-dev \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \

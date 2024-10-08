@@ -21,6 +21,7 @@ RUN true \
         clang-format-${CLANGVERSION} \
         python3-pip \
         python3-setuptools \
+        python3-dev \
     && rm -rf /var/lib/apt/lists/*
 RUN pip3 install --upgrade cmake-format
 
