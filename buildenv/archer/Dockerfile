@@ -15,13 +15,14 @@ deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${
 # add llvm repo key
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 
-# install clang and llvm
+# install clang llvm and python3-dev
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
         unzip \
+	    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # generate links to clang
