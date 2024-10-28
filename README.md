@@ -17,6 +17,7 @@ This file is used to check OpenMP data races. It uses the [archer data race dete
 * cmake
 * ninja
 * clang
+* python3-dev
 * llvm openmp library (v10) with bundled archer - it is automatically loaded when clang is used as compiler.
 
 **Important**: `export TSAN_OPTIONS="ignore_noninstrumented_modules=1"` is recommended for archer.
@@ -30,6 +31,7 @@ This file is used to build the AutoPas library using clang. It contains:
 * clang
 * libomp
 * clang-format
+* python3-dev
 
 ### code-coverage
 
@@ -48,6 +50,7 @@ This file is used to build the doxygen documentation. It includes:
 * cmake
 * doxygen
 * graphviz
+* python3-dev
 
 ### gcc
 This file is used to build the AutoPas library using gcc. It contains:
@@ -58,6 +61,7 @@ This file is used to build the AutoPas library using gcc. It contains:
 * mpich
 * ccache
 * lcov
+* python3-dev
 
 ## other uses
 Many of the provided Doxygen images / Doxyfiles can be used to build other things. Feel free to grab them and use them for your own purposes.
