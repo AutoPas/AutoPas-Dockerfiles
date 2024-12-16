@@ -18,13 +18,19 @@ RUN true \
         ssh \
         vim \
         wget \
-        python3-dev \
+        pybind11-dev \
+        nlohmann-json3-dev \
 # install AutoPas dependencies so we don't rely on bundled versions
         libeigen3-dev \
         libyaml-cpp-dev \
         # libspdlog-dev \ <- version too old. Needs at least 1.3.1
         # needed for bundled antlr4 (rule based tuning parser engine)
         uuid-dev \
+        python3 \
+        python3-pip \
+        python3-dev \
+        python3-setuptools \
+        python3-distutils \
     && rm -rf /var/lib/apt/lists/*
 
 # we might want to fix the certificate stuff
@@ -62,6 +68,10 @@ RUN wget --no-verbose -O spdlog.tgz https://github.com/gabime/spdlog/archive/v1.
         -DSPDLOG_BUILD_TESTS=OFF \
     && make install -j4
 
+# Update Python and ensure pip and setuptools are up to date
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
+# Add ccache and entrypoint script
 COPY bin/entrypoint.sh /usr/local/bin
 RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
 RUN mkdir -p /ccache_default_dir
