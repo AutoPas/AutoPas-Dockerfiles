@@ -1,6 +1,6 @@
 FROM autopas/build-base
 
-ENV CLANGVERSION=14
+ENV CLANGVERSION=15
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
@@ -16,7 +16,6 @@ RUN true \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
-        libclang-rt-${CLANGVERSION}-dev \
         libmpich-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
