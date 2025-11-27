@@ -16,6 +16,7 @@ RUN true \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
+        libclang-rt-${CLANGVERSION}-dev \
         libmpich-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
