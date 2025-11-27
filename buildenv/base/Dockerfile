@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-ENV UBUNTUVERSION="focal" \
+ENV UBUNTUVERSION="jammy" \
     DEBIAN_FRONTEND="noninteractive"
 
 # install base requirements + stuff that makes debugging easier
