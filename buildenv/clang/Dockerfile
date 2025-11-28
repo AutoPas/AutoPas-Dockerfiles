@@ -1,6 +1,6 @@
 FROM autopas/build-base
 
-ENV CLANGVERSION=15
+ENV CLANGVERSION=16
 
 # add llvm repository
 RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
@@ -10,13 +10,12 @@ deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${
 RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
 # install stuff
-# openmpi 4.0.3 still has a memory leak, hence install mpich
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
-        libmpich-dev \
+        libopenmpi-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
         python3-pip \

@@ -1,14 +1,13 @@
 FROM autopas/build-base
 
-ENV GCCVERSION="11"
+ENV GCCVERSION="13"
 
 # install stuff
-# openmpi 4.0.3 still has a memory leak, hence install mpich
-# add ppa for newer gcc, install gcc-11, and set links to make it default
+# add ppa for newer gcc, install gcc-13, and set links to make it default
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
-        libmpich-dev \
+        libopenmpi-dev \
         software-properties-common \
         python3-dev \
     && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
@@ -19,13 +18,13 @@ RUN true \
     && ln -s -f /usr/bin/gcc-${GCCVERSION} /usr/bin/gcc \
     && ln -s -f /usr/bin/g++-${GCCVERSION} /usr/bin/g++
 
-# install lcov and set gcov-11
+# install lcov and set gcov-13
 RUN cd \
     && perl -MCPAN -e 'install(Capture::Tiny, DateTime, Date::Parse, Cpanel::JSON::XS)' \
     && git clone https://github.com/linux-test-project/lcov.git \
     && cd lcov \
     && make install \
-    && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-11 60 \
+    && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 60 \
     && cd
 
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]
