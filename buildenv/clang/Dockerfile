@@ -2,12 +2,12 @@ FROM autopas/build-base
 
 ENV CLANGVERSION=16
 
-# add llvm repository
-RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
-deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
+# add llvm repository (needed for newer clang versions)
+# RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
+# deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
-RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
+# RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
 # install stuff
 RUN true \
@@ -18,11 +18,9 @@ RUN true \
         libopenmpi-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
-        python3-pip \
-        python3-setuptools \
+        cmake-format \
         python3-dev \
     && rm -rf /var/lib/apt/lists/*
-RUN pip3 install --upgrade cmake-format
 
 # generate version agnostic links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
