@@ -16,12 +16,24 @@ RUN true \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
         libclang-rt-${CLANGVERSION}-dev \
-        libopenmpi-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
         cmake-format \
         python3-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# openmpi has memory leaks and mpich from apt has bugs
+# install mpich from source
+WORKDIR /tmp
+RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz && \
+    tar -zxvf mpich-4.3.2rc2.tar.gz && \
+    cd mpich-4.3.2rc2 && \
+    ./configure --prefix=/usr --disable-fortran && \
+    make && \
+    make install && \
+    ldconfig
+
+ENV PATH=/usr/local/bin:$PATH
 
 # generate version agnostic links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
