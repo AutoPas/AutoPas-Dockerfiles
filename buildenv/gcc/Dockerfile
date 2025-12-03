@@ -28,8 +28,6 @@ RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz &
     make install && \
     ldconfig
 
-ENV PATH=/usr/local/bin:$PATH 
-
 # install lcov and set gcov-13
 RUN cd \
     && perl -MCPAN -e 'install(Capture::Tiny, DateTime, Date::Parse, Cpanel::JSON::XS)' \

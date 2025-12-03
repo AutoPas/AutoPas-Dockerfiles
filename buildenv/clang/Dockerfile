@@ -33,8 +33,6 @@ RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz &
     make install && \
     ldconfig
 
-ENV PATH=/usr/local/bin:$PATH
-
 # generate version agnostic links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
 RUN ln -s /usr/bin/clang++-${CLANGVERSION} /usr/bin/clang++
