@@ -19,12 +19,6 @@ RUN true \
         libspdlog-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# we might want to fix the certificate stuff
-# RUN wget -O cmakeInstallScript.sh https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh --no-check-certificate \
-#     && chmod +x cmakeInstallScript.sh \
-#     && ./cmakeInstallScript.sh --skip-license --prefix=/usr/local/ \
-#     && rm cmakeInstallScript.sh
-
 COPY bin/entrypoint.sh /usr/local/bin
 RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
 RUN mkdir -p /ccache_default_dir

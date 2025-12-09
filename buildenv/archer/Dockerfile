@@ -8,7 +8,7 @@ RUN true \
 
 ENV CLANGVERSION=16
 
-# add llvm repository (needed for newer versions of clang)
+# Add llvm repository (can be used to get newer versions of clang)
 # RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
 # deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main" > /etc/apt/sources.list.d/llvm.list
 
