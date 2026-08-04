@@ -1,29 +1,37 @@
 FROM autopas/build-base
 
-ENV CLANGVERSION 13
+ENV CLANGVERSION=16
 
-# add llvm repository
-RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
-deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
+# If needed in future: add llvm repository (can be used to get newer versions of clang)
+# RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
+# deb-src http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n" >> /etc/apt/sources.list.d/llvm.list
 
 # add llvm repo key
-RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
+# RUN wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add -
 
 # install stuff
-# openmpi 4.0.3 still has a memory leak, hence install mpich
 RUN true \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         clang-${CLANGVERSION} \
         lldb-${CLANGVERSION} \
-        libmpich-dev \
+        libclang-rt-${CLANGVERSION}-dev \
         libomp-${CLANGVERSION}-dev \
         clang-format-${CLANGVERSION} \
-        python3-pip \
-        python3-setuptools \
+        cmake-format \
         python3-dev \
     && rm -rf /var/lib/apt/lists/*
-RUN pip3 install --upgrade cmake-format
+
+# openmpi has memory leaks and mpich from apt has bugs
+# install mpich from source
+WORKDIR /tmp
+RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz && \
+    tar -zxvf mpich-4.3.2rc2.tar.gz && \
+    cd mpich-4.3.2rc2 && \
+    ./configure --prefix=/usr --disable-fortran && \
+    make && \
+    make install && \
+    ldconfig
 
 # generate version agnostic links to clang
 RUN ln -s /usr/bin/clang-${CLANGVERSION} /usr/bin/clang
