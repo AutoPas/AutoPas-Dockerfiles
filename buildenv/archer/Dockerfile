@@ -6,7 +6,7 @@ RUN true \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-ENV CLANGVERSION=16
+ENV CLANGVERSION=17
 
 # If needed in future: add llvm repository (can be used to get newer versions of clang)
 # RUN echo "deb http://apt.llvm.org/${UBUNTUVERSION}/ llvm-toolchain-${UBUNTUVERSION}-${CLANGVERSION} main\n\
