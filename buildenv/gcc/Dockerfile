@@ -31,10 +31,10 @@ RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz &
 # install lcov and set gcov-13
 RUN cd \
     && perl -MCPAN -e 'install(Capture::Tiny, DateTime, Date::Parse, Cpanel::JSON::XS)' \
-    && git clone https://github.com/linux-test-project/lcov.git \
+    && git clone --depth 1 https://github.com/linux-test-project/lcov.git \
     && cd lcov \
-    && make install \
+    && make NO_DOC=1 install \
     && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 60 \
-    && cd
+    && cd .. && rm -rf lcov
 
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]
