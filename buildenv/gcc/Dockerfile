@@ -13,6 +13,8 @@ RUN true \
         libtool \
         software-properties-common \
         python3-dev \
+        python3-sphinx \
+        python3-sphinx-rtd-theme \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s -f /usr/bin/gcc-${GCCVERSION} /usr/bin/gcc \
     && ln -s -f /usr/bin/g++-${GCCVERSION} /usr/bin/g++
@@ -31,10 +33,10 @@ RUN wget https://www.mpich.org/static/downloads/4.3.2rc2/mpich-4.3.2rc2.tar.gz &
 # install lcov and set gcov-13
 RUN cd \
     && perl -MCPAN -e 'install(Capture::Tiny, DateTime, Date::Parse, Cpanel::JSON::XS)' \
-    && git clone https://github.com/linux-test-project/lcov.git \
+    && git clone --depth 1 https://github.com/linux-test-project/lcov.git \
     && cd lcov \
     && make install \
     && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 60 \
-    && cd
+    && cd .. && rm -rf lcov
 
 CMD ["sh", "-c", "cmake -GNinja ../.. && ninja && ninja test"]
